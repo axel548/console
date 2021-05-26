@@ -26,55 +26,48 @@ if __name__ == '__main__':
     print(' Hello, I am V.E.R.O.N.I.C.A') 
     print(' Select a command')
     _spaces()
-    command =_execute_commands()
+    cmd =_execute_commands()
+    command = cmd.split()
 
     close = False
 
     while not close:
-        if command == 'exit':
+        if command[-1] == 'exit':
             close = True
 
-        elif command == 'mssg':
-            send_mssg()
-            _spaces()
-            command =_execute_commands()
-
-        elif command == 'history -mssg':
+        elif command[-1] == 'history':
             history_mssg()
             _spaces()
-            command = _execute_commands()
-
-        elif command == 'create -count':
-            create_c()
-            _spaces()
-            command = _execute_commands()
+            cmd = _execute_commands()
+            command = cmd.split()
         
-        elif command == 'clear':
+        elif command[-1] == 'clear':
             call('clear')
             _spaces()
-            command = _execute_commands()
+            cmd = _execute_commands()
+            command = cmd.split()
 
-            #------------------------------------------------------------------
-        elif command == 'prueba':
-            nombre = input("cadena>")
-            tratado = nombre.split()
+        elif command[0] == 'create':
+            if command[-1] == '-mssg':
+                send_mssg()
+                _spaces()
+                cmd = _execute_commands()
+                command = cmd.split()
 
-            if tratado[-1] == 'list':
-                print(tratado[-1])
-               
-            elif tratado[0] == 'list': 
-                if tratado[1] == '-mssg':
-                    print(tratado[1])
-                elif tratado[1] == '-count':
-                    print(tratado[1])
-                else:
-                    print('no funciono') 
+            elif command[-1] == '-count':
+                create_c()
+                _spaces()
+                cmd = _execute_commands()
+                command = cmd.split()
+
             else:
-                print('no funciono')
-            #-----------------------------------------------------------
+                _spaces()
+                cmd = _execute_commands()
+                command = cmd.split()
         else:
             print("  Invalid command")
             _spaces()
-            command = _execute_commands()
+            cmd = _execute_commands()
+            command = cmd.split()
         
         _save_counts_to_storage()
