@@ -1,2 +1,3 @@
 *.csv
-Ejemplos/
+/Ejemplos
+/__pycache__
