@@ -46,6 +46,10 @@ def _get_count_from_user():
     return count
 
 
+def _not_count_list():
+    return print('Count not in count\'s list')
+
+
 def create_count(count):
     global counts
 
@@ -54,6 +58,68 @@ def create_count(count):
     else:
         print('Count already in count\'s list')
 
+
 def create_c():
     count = _get_count_from_user()
     create_count(count)
+
+
+def list_c():
+    print('ID | Company | User | Email | Password | Description')
+    print('*' * 50)
+
+    for idx, count in enumerate(counts):
+        print('{uid} | {company} | {user} | {email} | {psswd} | {description}'.format(
+            uid = idx,
+            company = count['company'],
+            user = count['user'],
+            email = count['email'],
+            psswd = count['psswd'],
+            description = count['description']
+        ))
+
+
+def search_count(c_company):
+    for count in counts:
+        if count['company'] != c_company:
+            continue
+        else:
+            return True
+
+
+def search_c():
+    count_name = _get_count_field('company')
+    found = search_count(count_name)
+
+    if found:
+        print('The count is in the count\'s list')
+    else:
+        print('The count: {} is not in our count\'s list.'.format(count_name))
+
+
+def delete_count(c_id):
+    global counts
+
+    for idx, count in enumerate(counts):
+        if idx == c_id:
+            del counts[idx]
+            break
+
+
+def delete_c():
+    count_id = int(_get_count_field('id'))
+    delete_count(count_id)
+
+
+def update_count(c_id, updated_c):
+    global counts
+
+    if len(counts) - 1 >= c_id:
+        counts[c_id] = updated_c
+    else:
+        _not_count_list()
+
+def update_c():
+    count_id = int(_get_count_field('id'))
+    updated_count = _get_count_from_user()
+    update_count(count_id, updated_count)

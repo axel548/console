@@ -25,7 +25,7 @@ def _save_clients_to_storage():
 
 #------------------------------------------------------------------------------CREATE CLIENT
 def create_client(client):
-    global clients
+   global clients
 
     if client not in clients:
         clients.append(client)
@@ -45,14 +45,6 @@ def list_clients():
             email = client['email'],
             position = client['position'])) 
 
-#------------------------------------------------------------------------------DELETE CLIENT
-def delete_client(client_id):
-    global clients
-
-    for idx, client in enumerate(clients):
-        if idx == client_id:
-            del clients[idx]
-            break
 
 #---------------------------------------------------------------------------UPDATE CLIENTS
 def update_client(client_id, updated_client):
